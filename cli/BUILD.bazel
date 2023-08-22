@@ -18,6 +18,7 @@ rust_binary(
         "//tags:tree-sitter-tags",
         ":tree-sitter-cli"
     ],
+    visibility = ["//visibility:public"]
 )
 
 rust_library(

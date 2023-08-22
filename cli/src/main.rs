@@ -1,3 +1,4 @@
+use log::info;
 use anyhow::{anyhow, Context, Error, Result};
 use clap::{App, AppSettings, Arg, SubCommand};
 use glob::glob;
@@ -97,7 +98,7 @@ fn run() -> Result<()> {
                 .alias("gen")
                 .alias("g")
                 .about("Generate a parser")
-                .arg(Arg::with_name("grammar-path").index(1))
+                // .arg(Arg::with_name("grammar-path").index(1))
                 .arg(Arg::with_name("log").long("log"))
                 .arg(
                     Arg::with_name("abi-version")
@@ -120,6 +121,22 @@ fn run() -> Result<()> {
                         .help("Compile all defined languages in the current dir"),
                 )
                 .arg(&debug_build_arg)
+                .arg(
+                    Arg::with_name("grammar")
+                        .long("grammar")
+                        .short("g")
+                        .takes_value(true)
+                        .value_name("grammar-path")
+                        // .help("path to grammar file"),
+                )
+                .arg(
+                    Arg::with_name("outpath")
+                        .long("out")
+                        .short("o")
+                        .takes_value(true)
+                        .value_name("out-path")
+                        // .help("path to output file"),
+                )
                 .arg(
                     Arg::with_name("libdir")
                         .long("libdir")
@@ -330,9 +347,9 @@ fn run() -> Result<()> {
                 config.location.display()
             );
         }
-
         ("generate", Some(matches)) => {
-            let grammar_path = matches.value_of("grammar-path");
+            let grammar_path = matches.value_of("grammar");
+            let out_path = matches.value_of("outpath");
             let debug_build = matches.is_present("debug-build");
             let build = matches.is_present("build");
             let libdir = matches.value_of("libdir");
@@ -347,6 +364,7 @@ fn run() -> Result<()> {
             if matches.is_present("log") {
                 logger::init();
             }
+
             let abi_version = matches.value_of("abi-version").map_or(
                 Ok::<_, Error>(DEFAULT_GENERATE_ABI_VERSION),
                 |version| {
@@ -360,9 +378,11 @@ fn run() -> Result<()> {
                 },
             )?;
             let generate_bindings = !matches.is_present("no-bindings");
+
             generate::generate_parser_in_directory(
                 &current_dir,
                 grammar_path,
+                out_path,
                 abi_version,
                 generate_bindings,
                 report_symbol_name,

@@ -1,0 +1,7 @@
+load("//:RULES.bzl", "ts_genparser")
+
+ts_genparser(
+    name = "hello",
+    grammar = "grammar.js",
+    out = "parser.c"
+)

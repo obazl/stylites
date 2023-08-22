@@ -1,3 +1,5 @@
+use log::info;
+
 mod binding_files;
 mod build_tables;
 mod char_tree;
@@ -41,6 +43,7 @@ struct GeneratedParser {
 pub fn generate_parser_in_directory(
     repo_path: &PathBuf,
     grammar_path: Option<&str>,
+    out_path: Option<&str>,
     abi_version: usize,
     generate_bindings: bool,
     report_symbol_name: Option<&str>,
@@ -49,21 +52,26 @@ pub fn generate_parser_in_directory(
     let src_path = repo_path.join("src");
     let header_path = src_path.join("tree_sitter");
 
+    println!("grammar_path: {:?}", grammar_path);
+    println!("out_path: {:?}", out_path);
     // Read the grammar.json.
     let grammar_json = match grammar_path {
         Some(path) => load_grammar_file(path.as_ref(), js_runtime)?,
         None => {
-            let grammar_js_path = grammar_path.map_or(repo_path.join("grammar.js"), |s| s.into());
+            let grammar_js_path = grammar_path.map_or(repo_path.join("Xgrammar.js"), |s| s.into());
             load_grammar_file(&grammar_js_path, js_runtime)?
         }
     };
 
+
     // Ensure that the output directories exist.
-    fs::create_dir_all(&src_path)?;
+    // fs::create_dir_all(&src_path)?;
+    // fs::create_dir_all(out_path.unwrap())?;
     fs::create_dir_all(&header_path)?;
 
     if grammar_path.is_none() {
-        fs::write(&src_path.join("grammar.json"), &grammar_json)
+        // fs::write(&src_path.join("grammar.json"), &grammar_json)
+        fs::write(out_path.unwrap(), &grammar_json)
             .with_context(|| format!("Failed to write grammar.json to {:?}", src_path))?;
     }
 
@@ -87,7 +95,9 @@ pub fn generate_parser_in_directory(
         report_symbol_name,
     )?;
 
-    write_file(&src_path.join("parser.c"), c_code)?;
+    println!("out_path: {:?}", out_path);
+    write_file(Path::new(out_path.unwrap()), c_code)?;
+    // write_file(&src_path.join("parser.c"), c_code)?;
     write_file(&src_path.join("node-types.json"), node_types_json)?;
     write_file(&header_path.join("parser.h"), tree_sitter::PARSER_HEADER)?;
 
@@ -132,6 +142,7 @@ fn generate_parser_for_grammar_with_opts(
         &simple_aliases,
         &variable_info,
     );
+
     let (parse_table, main_lex_table, keyword_lex_table, keyword_capture_token) = build_tables(
         &syntax_grammar,
         &lexical_grammar,
@@ -163,9 +174,10 @@ pub fn load_grammar_file(grammar_path: &Path, js_runtime: Option<&str>) -> Resul
             "Path to a grammar file with `.js` or `.json` extension is required"
         ));
     }
+    info!("gp: {}", grammar_path.display());
     match grammar_path.extension().and_then(|e| e.to_str()) {
         Some("js") => Ok(load_js_grammar_file(grammar_path, js_runtime)
-            .with_context(|| "Failed to load grammar.js")?),
+            .with_context(|| "FAILED to load grammar.js")?),
         Some("json") => {
             Ok(fs::read_to_string(grammar_path).with_context(|| "Failed to load grammar.json")?)
         }

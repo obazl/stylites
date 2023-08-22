@@ -11,8 +11,10 @@ bazel_dep(name = "apple_support", version = "1.8.1",
 apple_cc_configure = use_extension("@build_bazel_apple_support//crosstool:setup.bzl", "apple_cc_configure_extension")
 use_repo(apple_cc_configure, "local_config_apple_cc")
 
-bazel_dep(name = "aspect_rules_js", version = "1.9.0",
-          dev_dependency = True)
+bazel_dep(name = "rules_nodejs", version = "6.0.1")
+
+# bazel_dep(name = "aspect_rules_js", version = "1.9.0",
+#           dev_dependency = True)
 
 bazel_dep(name = "rules_rust", version = "0.26.0",
           dev_dependency = True)
@@ -43,3 +45,5 @@ git_override(module_name = "rules_rust",
 # use_repo(cargo_bazel_bootstrap, "cargo_bazel_bootstrap")
 
 # register_toolchains("@rust_toolchains//:all")
+
+
