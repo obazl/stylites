@@ -1,20 +1,26 @@
 # workspace( name = "tree-sitter" )
 
-load("@rules_rust//rust:repositories.bzl",
-     "rules_rust_dependencies",
-     "rust_register_toolchains")
-
-load("@rules_rust//crate_universe:repositories.bzl",
-     "crate_universe_dependencies")
-
-load("@rules_rust//crate_universe:defs.bzl",
-     "crates_repository")
-
-load("@rules_rust//crate_universe:deps_bootstrap.bzl",
-     "cargo_bazel_bootstrap")
-
-load("@build_bazel_apple_support//lib:repositories.bzl",
-     "apple_support_dependencies")
+load(
+    "@rules_rust//rust:repositories.bzl",
+    "rules_rust_dependencies",
+    "rust_register_toolchains",
+)
+load(
+    "@rules_rust//crate_universe:repositories.bzl",
+    "crate_universe_dependencies",
+)
+load(
+    "@rules_rust//crate_universe:defs.bzl",
+    "crates_repository",
+)
+load(
+    "@rules_rust//crate_universe:deps_bootstrap.bzl",
+    "cargo_bazel_bootstrap",
+)
+load(
+    "@build_bazel_apple_support//lib:repositories.bzl",
+    "apple_support_dependencies",
+)
 
 apple_support_dependencies()
 
@@ -24,9 +30,10 @@ rust_register_toolchains(
     edition = "2018",
 )
 
-crate_universe_dependencies() # bootstrap = True)
+crate_universe_dependencies()  # bootstrap = True)
 
-cargo_bazel_bootstrap() # makes cargo-bazel binary available
+cargo_bazel_bootstrap()  # makes cargo-bazel binary available
+
 ## as @cargo_bazel_bootstrap//:cargo-bazel
 ## add it to generator attrib of crates_repository:
 crates_repository(
@@ -45,7 +52,7 @@ crates_repository(
         # "//highlight:Cargo.toml",
         # "//tags:Cargo.toml",
     ],
-    supported_platform_triples = ["aarch64-apple-darwin"]
+    supported_platform_triples = ["aarch64-apple-darwin"],
 )
 
 load(

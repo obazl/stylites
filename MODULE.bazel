@@ -6,10 +6,11 @@ module(
 bazel_dep(name = "platforms", version = "0.0.7")
 bazel_dep(name = "bazel_skylib", version = "1.4.2")
 
-bazel_dep(name = "apple_support", version = "1.8.1",
-          repo_name = "build_bazel_apple_support")
+bazel_dep(name = "apple_support", version = "1.8.1", repo_name = "build_bazel_apple_support")
 apple_cc_configure = use_extension("@build_bazel_apple_support//crosstool:setup.bzl", "apple_cc_configure_extension")
 use_repo(apple_cc_configure, "local_config_apple_cc")
+
+bazel_dep(name = "rules_cc", version = "0.0.8")
 
 bazel_dep(name = "aspect_rules_js", version = "1.9.0",
           dev_dependency = True)
