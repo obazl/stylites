@@ -1,0 +1,45 @@
+module(
+    name = "tree-sitter",
+    version = "1.0.0",
+    compatibility_level = 1,
+)
+bazel_dep(name = "platforms", version = "0.0.7")
+bazel_dep(name = "bazel_skylib", version = "1.4.2")
+
+bazel_dep(name = "apple_support", version = "1.8.1",
+          repo_name = "build_bazel_apple_support")
+apple_cc_configure = use_extension("@build_bazel_apple_support//crosstool:setup.bzl", "apple_cc_configure_extension")
+use_repo(apple_cc_configure, "local_config_apple_cc")
+
+bazel_dep(name = "aspect_rules_js", version = "1.9.0",
+          dev_dependency = True)
+
+bazel_dep(name = "rules_rust", version = "0.26.0",
+          dev_dependency = True)
+
+git_override(module_name = "rules_rust",
+             remote = "https://github.com/bazelbuild/rules_rust.git",
+             commit = '0ed7157402aacd2c8b5310d8348ec792826da4d4',
+)
+             # https://github.com/bazelbuild/rules_rust/commit/0ed7157402aacd2c8b5310d8348ec792826da4d4
+             # patches=[], patch_cmds=[], patch_strip=0
+             # )
+
+################################################################
+## https://github.com/bazelbuild/rules_rust/pull/2021
+
+# rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+# rust.toolchain(edition = "2021")
+# use_repo(
+#     rust,
+#     "rust_toolchains",
+#     "rust_host_tools",
+# )
+
+# cargo_bazel_bootstrap = use_extension(
+#     "@rules_rust//crate_universe/private/module_extensions:cargo_bazel_bootstrap.bzl",
+#     "cargo_bazel_bootstrap",
+# )
+# use_repo(cargo_bazel_bootstrap, "cargo_bazel_bootstrap")
+
+# register_toolchains("@rust_toolchains//:all")

@@ -1,3 +1,7 @@
+.bazel
+bazel-*
+*.gz
+
 log*.html
 
 .idea

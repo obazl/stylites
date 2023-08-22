@@ -1,0 +1,36 @@
+load("@rules_rust//cargo:defs.bzl", "cargo_build_script")
+load("@crate_index//:defs.bzl",
+     "aliases", "all_crate_deps")
+load("@rules_rust//rust:defs.bzl", "rust_library", "rust_test")
+
+rust_library(
+    name = "tree-sitter",
+    srcs = glob(["**/*.rs"]),
+    compile_data = [
+        "//lib/include/tree_sitter:api.h",
+        "//lib/include/tree_sitter:parser.h"
+    ],
+    aliases = aliases(),
+    edition = "2018",
+    proc_macro_deps = all_crate_deps(proc_macro = True),
+    deps = all_crate_deps(normal = True) + [
+        "//lib/src:tree-sitter",
+        ":build"
+    ],
+    visibility = [
+        "//cli:__subpackages__",
+        "//highlight:__pkg__",
+        "//tags:__pkg__"
+    ]
+)
+
+cargo_build_script(
+    name = "build",
+    srcs = ["binding_rust/build.rs"],
+    data = ["src", "include"],
+    deps = all_crate_deps(
+        normal = True,
+        build = True,
+    ),
+    crate_root = "binding_rust/build.rs",
+)

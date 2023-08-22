@@ -1,0 +1,8 @@
+exports_files(["api.h", "parser.h"])
+
+cc_library(
+    name = "hdrs",
+    hdrs = ["api.h", "parser.h"],
+    include_prefix = "tree_sitter",
+    visibility = ["//lib:__subpackages__"]
+)
