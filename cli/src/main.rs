@@ -1,4 +1,3 @@
-use log::info;
 use anyhow::{anyhow, Context, Error, Result};
 use clap::{App, AppSettings, Arg, SubCommand};
 use glob::glob;
@@ -114,6 +113,20 @@ fn run() -> Result<()> {
                         )),
                 )
                 .arg(Arg::with_name("no-bindings").long("no-bindings"))
+                .arg(
+                    Arg::with_name("rust-bindings")
+                        .long("rust-bindings")
+                        .takes_value(true)
+                        .value_name("rust-bindings-dir")
+                        .help("Generate rust bindings"),
+                )
+                .arg(
+                    Arg::with_name("node-bindings")
+                        .long("node-bindings")
+                        .takes_value(true)
+                        .value_name("node-bindings-dir")
+                        .help("Generate nodejs bindings"),
+                )
                 .arg(
                     Arg::with_name("build")
                         .long("build")
@@ -327,6 +340,8 @@ fn run() -> Result<()> {
         .get_matches();
 
     let current_dir = env::current_dir().unwrap();
+    println!("current_dir: {}", current_dir.display());
+
     let config = Config::load()?;
     let mut loader = loader::Loader::new()?;
 
@@ -350,6 +365,11 @@ fn run() -> Result<()> {
         ("generate", Some(matches)) => {
             let grammar_path = matches.value_of("grammar");
             let out_path = matches.value_of("outpath");
+            let generate_rust_bindings = matches.value_of("rust-bindings");
+            let node_bindings_outdir = matches.value_of("node-bindings");
+
+            let build = matches.is_present("build");
+
             let debug_build = matches.is_present("debug-build");
             let build = matches.is_present("build");
             let libdir = matches.value_of("libdir");
@@ -377,14 +397,22 @@ fn run() -> Result<()> {
                     })
                 },
             )?;
-            let generate_bindings = !matches.is_present("no-bindings");
+            // let generate_bindings = !matches.is_present("no-bindings");
+
+    // println!("generate_bindings: {}", generate_bindings);
+            println!("generate_rust_bindings: {:?}",
+                     generate_rust_bindings);
+            println!("node_bindings_outdir: {:?}",
+                     node_bindings_outdir);
 
             generate::generate_parser_in_directory(
                 &current_dir,
                 grammar_path,
                 out_path,
                 abi_version,
-                generate_bindings,
+                // generate_bindings,
+                generate_rust_bindings,
+                node_bindings_outdir,
                 report_symbol_name,
                 js_runtime,
             )?;

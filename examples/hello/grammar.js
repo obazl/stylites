@@ -1,6 +1,6 @@
 module.exports = grammar({
 
-  name: 'obazl',
+  name: 'klingon',
 
   rules: {
     // TODO: add the actual grammar rules

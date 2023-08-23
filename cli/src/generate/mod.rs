@@ -45,15 +45,23 @@ pub fn generate_parser_in_directory(
     grammar_path: Option<&str>,
     out_path: Option<&str>,
     abi_version: usize,
-    generate_bindings: bool,
+    // generate_bindings: bool,
+    generate_rust_bindings: Option<&str>,
+    node_bindings_outdir: Option<&str>,
     report_symbol_name: Option<&str>,
     js_runtime: Option<&str>,
 ) -> Result<()> {
+    println!("repo_path: {:?}", repo_path.display());
+    println!("grammar_path: {:?}", grammar_path);
+    println!("out_path: {:?}", out_path);
+    println!("generate_rust_bindings: {:?}", generate_rust_bindings);
+    println!("node_bindings_outdir: {:?}", node_bindings_outdir);
+    println!("report_symbol_name: {:?}", report_symbol_name);
+    println!("js_runtime: {:?}", js_runtime);
+
     let src_path = repo_path.join("src");
     let header_path = src_path.join("tree_sitter");
 
-    println!("grammar_path: {:?}", grammar_path);
-    println!("out_path: {:?}", out_path);
     // Read the grammar.json.
     let grammar_json = match grammar_path {
         Some(path) => load_grammar_file(path.as_ref(), js_runtime)?,
@@ -80,7 +88,7 @@ pub fn generate_parser_in_directory(
     let (syntax_grammar, lexical_grammar, inlines, simple_aliases) =
         prepare_grammar(&input_grammar)?;
     let language_name = input_grammar.name;
-
+    
     // Generate the parser and related files.
     let GeneratedParser {
         c_code,
@@ -95,15 +103,28 @@ pub fn generate_parser_in_directory(
         report_symbol_name,
     )?;
 
+    println!("language_name: {:?}", language_name);
     println!("out_path: {:?}", out_path);
     write_file(Path::new(out_path.unwrap()), c_code)?;
     // write_file(&src_path.join("parser.c"), c_code)?;
     write_file(&src_path.join("node-types.json"), node_types_json)?;
     write_file(&header_path.join("parser.h"), tree_sitter::PARSER_HEADER)?;
 
-    if generate_bindings {
-        binding_files::generate_binding_files(&repo_path, &language_name)?;
-    }
+    // if generate_bindings {
+    //     binding_files::generate_binding_files(&repo_path, &language_name)?;
+    // }
+
+    let rustbindings = match generate_rust_bindings {
+        Some(path) => binding_files::generate_rust_binding_files(Path::new(path), &language_name)?,
+// (&repo_path, &language_name)?;
+        None => {}
+    };
+
+    let nodebindings = match node_bindings_outdir {
+        Some(path) => binding_files::generate_node_binding_files(Path::new(path), &language_name)?,
+// (&repo_path, &language_name)?;
+        None => {}
+    };
 
     Ok(())
 }

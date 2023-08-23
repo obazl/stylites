@@ -1,7 +1,9 @@
-load("//:RULES.bzl", "ts_genparser")
+load("//:RULES.bzl", "tree_sitter_genparser")
 
-ts_genparser(
+tree_sitter_genparser(
     name = "hello",
     grammar = "grammar.js",
-    out = "parser.c"
+    out = "klingon.c",
+    rust_bindings = True,
+    node_bindings = True
 )
