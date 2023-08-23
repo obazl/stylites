@@ -27,7 +27,7 @@ cc_test(
 
 cc_library(
     name = "imp",
-    srcs = [":imp.c"],
+    srcs = [":imp_parser.c"],
     deps = ["//lib/src:tree-sitter"],
     copts = ["-Ilib/include/tree_sitter"]
 )
@@ -35,7 +35,7 @@ cc_library(
 tree_sitter_genparser(
     name = "parser",
     grammar = "grammar.js",
-    out = "imp.c",
+    out = "imp_parser.c",
     rust_bindings = True,
     node_bindings = True
 )

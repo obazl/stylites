@@ -107,20 +107,24 @@ pub fn generate_parser_in_directory(
     println!("out_path: {:?}", out_path);
     write_file(Path::new(out_path.unwrap()), c_code)?;
     // write_file(&src_path.join("parser.c"), c_code)?;
-    write_file(&src_path.join("node-types.json"), node_types_json)?;
-    write_file(&header_path.join("parser.h"), tree_sitter::PARSER_HEADER)?;
+
+    // write_file(&src_path.join("node-types.json"), node_types_json)?;
+    write_file(Path::new(node_bindings_outdir.unwrap()).join("node-types.json").as_path(), node_types_json)?;
+
+    // write_file(&header_path.join("parser.h"), tree_sitter::PARSER_HEADER)?;
+    let _ = write_file(Path::new(node_bindings_outdir.unwrap()).join("parser.h").as_path(), tree_sitter::PARSER_HEADER);
 
     // if generate_bindings {
     //     binding_files::generate_binding_files(&repo_path, &language_name)?;
     // }
 
-    let rustbindings = match generate_rust_bindings {
+    let _rustbindings = match generate_rust_bindings {
         Some(path) => binding_files::generate_rust_binding_files(Path::new(path), &language_name)?,
 // (&repo_path, &language_name)?;
         None => {}
     };
 
-    let nodebindings = match node_bindings_outdir {
+    let _nodebindings = match node_bindings_outdir {
         Some(path) => binding_files::generate_node_binding_files(Path::new(path), &language_name)?,
 // (&repo_path, &language_name)?;
         None => {}
@@ -255,6 +259,7 @@ fn load_js_grammar_file(grammar_path: &Path, js_runtime: Option<&str>) -> Result
 }
 
 fn write_file(path: &Path, body: impl AsRef<[u8]>) -> Result<()> {
+    println!("write_file: {:?}", path);
     fs::write(path, body)
         .with_context(|| format!("Failed to write {:?}", path.file_name().unwrap()))
 }

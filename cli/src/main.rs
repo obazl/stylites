@@ -368,8 +368,6 @@ fn run() -> Result<()> {
             let generate_rust_bindings = matches.value_of("rust-bindings");
             let node_bindings_outdir = matches.value_of("node-bindings");
 
-            let build = matches.is_present("build");
-
             let debug_build = matches.is_present("debug-build");
             let build = matches.is_present("build");
             let libdir = matches.value_of("libdir");

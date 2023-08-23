@@ -21,6 +21,10 @@ def _ts_impl(ctx):
     args.add_all(ctx.attr.opts)
     args.add("--grammar", ctx.file.grammar.path)
     args.add("-o", ctx.outputs.out.path)
+    # also emits src/node-types.json, src/tree_sitter/parser.h
+    outputs.append(ctx.actions.declare_file("node-types.json"))
+    outputs.append(ctx.actions.declare_file("parser.h"))
+
     if ctx.attr.rust_bindings:
         # generates in bindings/rust: lib.rs, build.rs
         # generates in cwd: Cargo.toml
