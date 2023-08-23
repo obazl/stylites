@@ -1,5 +1,6 @@
 # https://github.com/bazelbuild/apple_support#toolchain-setup
 
+common --enable_bzlmod
 build --enable_platform_specific_config
 build:macos --apple_crosstool_top=@local_config_apple_cc//:toolchain
 build:macos --crosstool_top=@local_config_apple_cc//:toolchain
