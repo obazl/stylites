@@ -2,7 +2,7 @@ load("//:RULES.bzl", "tree_sitter_genparser")
 
 DEPS = ["@gopt//src:gopt",
         "@unity//src:unity",
-        "//lib/src:tree-sitter",
+        "//lib/src:tree-sitter-runtime",
         ":imp"]
 COPTS = ["-Iexternal/gopt~10.0.0/src",
          "-Iexternal/unity~2.5.2/src",
@@ -28,7 +28,7 @@ cc_test(
 cc_library(
     name = "imp",
     srcs = [":imp_parser.c"],
-    deps = ["//lib/src:tree-sitter"],
+    deps = ["//lib/src:tree-sitter-runtime"],
     copts = ["-Ilib/include/tree_sitter"]
 )
 

@@ -20,21 +20,21 @@ fn main() {
     #[cfg(feature = "bindgen")]
     generate_bindings();
 
-    let src_path = Path::new("src");
-    for entry in fs::read_dir(&src_path).unwrap() {
-        let entry = entry.unwrap();
-        let path = src_path.join(entry.file_name());
-        println!("cargo:rerun-if-changed={}", path.to_str().unwrap());
-    }
+    // let src_path = Path::new("src");
+    // for entry in fs::read_dir(&src_path).unwrap() {
+    //     let entry = entry.unwrap();
+    //     let path = src_path.join(entry.file_name());
+    //     println!("cargo:rerun-if-changed={}", path.to_str().unwrap());
+    // }
 
-    cc::Build::new()
-        .flag_if_supported("-std=c99")
-        .flag_if_supported("-fvisibility=hidden")
-        .flag_if_supported("-Wshadow")
-        .include(src_path)
-        .include("include")
-        .file(src_path.join("lib.c"))
-        .compile("tree-sitter");
+    // cc::Build::new()
+    //     .flag_if_supported("-std=c99")
+    //     .flag_if_supported("-fvisibility=hidden")
+    //     .flag_if_supported("-Wshadow")
+    //     .include(src_path)
+    //     .include("include")
+    //     .file(src_path.join("lib.c"))
+    //     .compile("tree-sitter");
 }
 
 #[cfg(feature = "bindgen")]
