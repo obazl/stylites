@@ -6,8 +6,8 @@
 [CICD badge]: https://github.com/tree-sitter/tree-sitter/actions/workflows/CICD.yml/badge.svg
 [CICD]: https://github.com/tree-sitter/tree-sitter/actions/workflows/CICD.yml
 
-BAZEL STATUS: Not tested. On MacOS this works: `bazel run
-cli:tree-sitter`.
+BAZEL STATUS: Very lightly tested, on MacOS only. This works: `bazel run cli:tree-sitter`. The `cli` branch contains a custom
+`tree_sitter_genparser` rule, a version of `tree-sitter-cli` modified to improve the UI (and play nicer with Bazel), and simple test case (`bazel build example/hello:klingon.c`).
 
 Tree-sitter is a parser generator tool and an incremental parsing library. It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited. Tree-sitter aims to be:
 
