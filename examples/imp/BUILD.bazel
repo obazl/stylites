@@ -25,6 +25,8 @@ cc_test(
     tags          = TAGS
 )
 
+#FIXME: use a custom rule with default tree-sitter-runtime dep?
+# e.g. tree-sitter-parser( ... )
 cc_library(
     name = "imp",
     srcs = [":imp_parser.c"],
