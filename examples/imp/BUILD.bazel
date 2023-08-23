@@ -1,0 +1,41 @@
+load("//:RULES.bzl", "tree_sitter_genparser")
+
+DEPS = ["@gopt//src:gopt",
+        "@unity//src:unity",
+        "//lib/src:tree-sitter",
+        ":imp"]
+COPTS = ["-Iexternal/gopt~10.0.0/src",
+         "-Iexternal/unity~2.5.2/src",
+         "-Ilib/src"]
+LINKOPTS = []
+DEFINES = []
+TOOLCHAINS = []
+TIMEOUT = "short"
+TAGS = []
+
+cc_test(
+    name          = "imp_test",
+    srcs          = ["imp_test.c"],
+    deps          = DEPS,
+    copts         = COPTS,
+    linkopts      = LINKOPTS,
+    local_defines = DEFINES,
+    # toolchains    = TOOLCHAINS,
+    timeout       = TIMEOUT,
+    tags          = TAGS
+)
+
+cc_library(
+    name = "imp",
+    srcs = [":imp.c"],
+    deps = ["//lib/src:tree-sitter"],
+    copts = ["-Ilib/include/tree_sitter"]
+)
+
+tree_sitter_genparser(
+    name = "parser",
+    grammar = "grammar.js",
+    out = "imp.c",
+    rust_bindings = True,
+    node_bindings = True
+)

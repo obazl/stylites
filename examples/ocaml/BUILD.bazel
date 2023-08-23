@@ -1,9 +1,9 @@
 load("//:RULES.bzl", "tree_sitter_genparser")
 
 tree_sitter_genparser(
-    name = "hello",
+    name = "ocaml",
     grammar = "grammar.js",
-    out = "klingon.c",
+    out = "ocaml.c",
     rust_bindings = True,
     node_bindings = True
 )

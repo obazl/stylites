@@ -6,6 +6,12 @@ module(
 bazel_dep(name = "platforms", version = "0.0.7")
 bazel_dep(name = "bazel_skylib", version = "1.4.2")
 
+bazel_dep(name = "gopt",  version = "10.0.0",
+          dev_dependency = True)
+# bazel_dep(name = "liblogc",  version = "1.0.0")
+bazel_dep(name = "unity", version = "2.5.2",
+          dev_dependency = True)
+
 bazel_dep(name = "apple_support", version = "1.8.1",
           repo_name = "build_bazel_apple_support")
 apple_cc_configure = use_extension("@build_bazel_apple_support//crosstool:setup.bzl", "apple_cc_configure_extension")
