@@ -37,6 +37,7 @@ rust_library(
         "src/generate/prepare_grammar/unicode-property-aliases.json",
         "src/generate/templates/binding.cc",
         "src/generate/templates/binding.gyp",
+        "src/generate/templates/BUILD.bazel.tplt",
         "src/generate/templates/cargo.toml",
         "src/generate/templates/index.js",
         "src/generate/templates/package.json",

@@ -9,6 +9,7 @@ const INDEX_JS_TEMPLATE: &'static str = include_str!("./templates/index.js");
 const LIB_RS_TEMPLATE: &'static str = include_str!("./templates/lib.rs");
 const BUILD_RS_TEMPLATE: &'static str = include_str!("./templates/build.rs");
 const CARGO_TOML_TEMPLATE: &'static str = include_str!("./templates/cargo.toml");
+const BUILD_BAZEL_TEMPLATE: &'static str = include_str!("./templates/BUILD.bazel.tplt");
 const PACKAGE_JSON_TEMPLATE: &'static str = include_str!("./templates/package.json");
 const PARSER_NAME_PLACEHOLDER: &'static str = "PARSER_NAME";
 const CLI_VERSION_PLACEHOLDER: &'static str = "CLI_VERSION";
@@ -121,6 +122,10 @@ pub fn generate_rust_binding_files(repo_path: &Path, language_name: &str) -> Res
 
     create_path(&repo_path.join("Cargo.toml").to_owned(), |path| {
         generate_file(path, CARGO_TOML_TEMPLATE, dashed_language_name)
+    })?;
+
+    create_path(&repo_path.join("BUILD.bazel").to_owned(), |path| {
+        generate_file(path, BUILD_BAZEL_TEMPLATE, dashed_language_name)
     })?;
 
     // // Generate node bindings
