@@ -716,11 +716,11 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::generate::grammars::{
+    use crate::generator::grammars::{
         InputGrammar, LexicalVariable, Production, ProductionStep, SyntaxVariable, Variable,
     };
-    use crate::generate::prepare_grammar::prepare_grammar;
-    use crate::generate::rules::Rule;
+    use crate::generator::prepare_grammar::prepare_grammar;
+    use crate::generator::rules::Rule;
 
     #[test]
     fn test_node_types_simple() {

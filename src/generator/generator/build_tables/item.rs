@@ -1,5 +1,5 @@
-use crate::generate::grammars::{LexicalGrammar, Production, ProductionStep, SyntaxGrammar};
-use crate::generate::rules::{Associativity, Precedence, Symbol, SymbolType, TokenSet};
+use crate::generator::grammars::{LexicalGrammar, Production, ProductionStep, SyntaxGrammar};
+use crate::generator::rules::{Associativity, Precedence, Symbol, SymbolType, TokenSet};
 use lazy_static::lazy_static;
 use std::cmp::Ordering;
 use std::fmt;

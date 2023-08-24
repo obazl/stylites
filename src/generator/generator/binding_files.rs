@@ -6,10 +6,9 @@ use std::{fs, str};
 const BINDING_CC_TEMPLATE: &'static str = include_str!("./templates/binding.cc");
 const BINDING_GYP_TEMPLATE: &'static str = include_str!("./templates/binding.gyp");
 const INDEX_JS_TEMPLATE: &'static str = include_str!("./templates/index.js");
-const LIB_RS_TEMPLATE: &'static str = include_str!("./templates/lib.rs");
+// const LIB_RS_TEMPLATE: &'static str = include_str!("./templates/lib.rs");
 const BUILD_RS_TEMPLATE: &'static str = include_str!("./templates/build.rs");
 const CARGO_TOML_TEMPLATE: &'static str = include_str!("./templates/cargo.toml");
-// const BUILD_BAZEL_TEMPLATE: &'static str = include_str!("./templates/BUILD.bazel.tplt");
 const PACKAGE_JSON_TEMPLATE: &'static str = include_str!("./templates/package.json");
 const PARSER_NAME_PLACEHOLDER: &'static str = "PARSER_NAME";
 const CLI_VERSION_PLACEHOLDER: &'static str = "CLI_VERSION";
@@ -112,9 +111,9 @@ pub fn generate_rust_binding_files(repo_path: &Path, language_name: &str) -> Res
     let rust_binding_dir = bindings_dir.join("rust");
     create_path(&rust_binding_dir, |path| create_dir(path))?;
 
-    create_path(&rust_binding_dir.join("lib.rs").to_owned(), |path| {
-        generate_file(path, LIB_RS_TEMPLATE, language_name)
-    })?;
+    // create_path(&rust_binding_dir.join("lib.rs").to_owned(), |path| {
+    //     generate_file(path, LIB_RS_TEMPLATE, language_name)
+    // })?;
 
     create_path(&rust_binding_dir.join("build.rs").to_owned(), |path| {
         generate_file(path, BUILD_RS_TEMPLATE, language_name)

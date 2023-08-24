@@ -1,6 +1,6 @@
 use super::{ExtractedLexicalGrammar, ExtractedSyntaxGrammar, InternedGrammar};
-use crate::generate::grammars::{ExternalToken, Variable, VariableType};
-use crate::generate::rules::{MetadataParams, Rule, Symbol, SymbolType};
+use crate::generator::grammars::{ExternalToken, Variable, VariableType};
+use crate::generator::rules::{MetadataParams, Rule, Symbol, SymbolType};
 use anyhow::{anyhow, Result};
 use std::collections::HashMap;
 use std::mem;
@@ -311,7 +311,7 @@ impl SymbolReplacer {
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::generate::grammars::VariableType;
+    use crate::generator::grammars::VariableType;
 
     #[test]
     fn test_extraction() {

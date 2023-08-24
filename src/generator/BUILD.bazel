@@ -9,28 +9,54 @@ rust_binary(
     srcs = ["main.rs"], # glob(["**/*.rs"]),
     # aliases = aliases(),
     edition = "2018",
-    proc_macro_deps = all_crate_deps(proc_macro = True),
-    deps = all_crate_deps(normal = True) + [
+    # proc_macro_deps = all_crate_deps(proc_macro = True),
+    deps = [ # all_crate_deps(normal = True) + [
+        "//src/runtime/bindings/rust:tree-sitter",
+        ":tree-sitter-generator",
+
+        # "@crate_index//:ansi_term",
+        "@crate_index//:anyhow",
+        # "@crate_index//:atty",
+        "@crate_index//:clap",
+        "@crate_index//:glob"
+
         # "//cli/config:tree-sitter-config",
         # "//cli/loader:tree-sitter-loader",
         # "//highlight:tree-sitter-highlight",
-        "//src/runtime/bindings/rust:tree-sitter",
         # ":tree-sitter-cli"
     ],
     visibility = ["//visibility:public"]
 )
 
 rust_library(
-    name = "tree-sitter-generator",
-    srcs = glob(["**/*.rs"], excluding=["main.rs"]),
+    name = "generator",
+    srcs = glob(["**/*.rs"],
+                 # "build_tables/*rs",
+                 # "prepare_grammar/*rs"],
+                exclude=["main.rs", "templates/*"]),
+    crate_root = "lib.rs",
     edition = "2018",
-    proc_macro_deps = all_crate_deps(proc_macro = True),
+    # proc_macro_deps = all_crate_deps(proc_macro = True),
     rustc_env = {# "EMSCRIPTEN_VERSION": "3.1.37",
         ## from Cargo.toml: dependencies.tree-sitter.version
         "RUST_BINDING_VERSION": "0.20.10"
     },
-    deps = all_crate_deps(normal = True) + [
+    deps = [ # all_crate_deps(normal = True) + [
         "//src/runtime/bindings/rust:tree-sitter",
+        "@crate_index//:ansi_term",
+        "@crate_index//:anyhow",
+        "@crate_index//:atty",
+        "@crate_index//:clap",
+        "@crate_index//:indexmap",
+        "@crate_index//:lazy_static",
+        "@crate_index//:log",
+        "@crate_index//:regex",
+        "@crate_index//:regex-syntax",
+        "@crate_index//:rustc-hash",
+        "@crate_index//:semver",
+        "@crate_index//:smallbitvec",
+        "@crate_index//:serde",
+        "@crate_index//:serde_json",
 
         # "//cli/loader:tree-sitter-loader",
         # "//highlight:tree-sitter-highlight",
@@ -38,19 +64,21 @@ rust_library(
         # ":build"
     ],
     data = [
-        "dsl.js",
-        "src/generate/prepare_grammar/unicode-categories.json",
-        "src/generate/prepare_grammar/unicode-category-aliases.json",
-        "src/generate/prepare_grammar/unicode-properties.json",
-        "src/generate/prepare_grammar/unicode-property-aliases.json",
-        "src/generate/templates/binding.cc",
-        "src/generate/templates/binding.gyp",
-        "src/generate/templates/BUILD.bazel.tplt",
-        "src/generate/templates/cargo.toml",
-        "src/generate/templates/index.js",
-        "src/generate/templates/package.json",
-        "src/playground.html",
-        "vendor/xterm-colors.json"
+        "generator/dsl.js",
+        "generator/prepare_grammar/unicode-categories.json",
+        "generator/prepare_grammar/unicode-category-aliases.json",
+        "generator/prepare_grammar/unicode-properties.json",
+        "generator/prepare_grammar/unicode-property-aliases.json",
+        "generator/templates/binding.cc",
+        "generator/templates/binding.gyp",
+        # "templates/BUILD.bazel.tplt",
+        "generator/templates/cargo.toml",
+        "generator/templates/build.rs",
+        "generator/templates/lib.rs",
+        "generator/templates/index.js",
+        "generator/templates/package.json",
+        # "src/playground.html",
+        # "vendor/xterm-colors.json"
     ],
 )
 

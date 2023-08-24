@@ -2,7 +2,7 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@bazel_skylib//lib:selects.bzl", "selects")
 
 cc_library(
-    name  = "tree-sitter-runtime",
+    name  = "tree-sitter",
     srcs  = ["//src/runtime/src:srcs"],
     # srcs  = [
     #     "alloc.c",

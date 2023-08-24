@@ -1,12 +1,12 @@
 use super::item::{ParseItem, ParseItemSet, ParseItemSetCore};
 use super::item_set_builder::ParseItemSetBuilder;
-use crate::generate::grammars::PrecedenceEntry;
-use crate::generate::grammars::{
+use crate::generator::grammars::PrecedenceEntry;
+use crate::generator::grammars::{
     InlinedProductionMap, LexicalGrammar, SyntaxGrammar, VariableType,
 };
-use crate::generate::node_types::VariableInfo;
-use crate::generate::rules::{Associativity, Precedence, Symbol, SymbolType, TokenSet};
-use crate::generate::tables::{
+use crate::generator::node_types::VariableInfo;
+use crate::generator::rules::{Associativity, Precedence, Symbol, SymbolType, TokenSet};
+use crate::generator::tables::{
     FieldLocation, GotoAction, ParseAction, ParseState, ParseStateId, ParseTable, ParseTableEntry,
     ProductionInfo, ProductionInfoId,
 };

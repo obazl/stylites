@@ -7,7 +7,7 @@ LINENOISE_VERSION = "1.0.0"
 DEPS = ["@gopt//src:gopt",
         "@liblogc//src:logc",
         "@unity//src:unity",
-        "//src/runtime:tree-sitter-runtime",
+        "//src/runtime:tree-sitter",
         ":imp"]
 COPTS = ["-Iexternal/gopt~10.0.0/src",
          "-Iexternal/unity~2.5.2/src",
@@ -30,12 +30,12 @@ cc_test(
     tags          = TAGS
 )
 
-#FIXME: use a custom rule with default tree-sitter-runtime dep?
+#FIXME: use a custom rule with default tree-sitter dep?
 # e.g. tree-sitter-parser( ... )
 cc_library(
     name = "imp",
     srcs = [":imp_parser.c"],
-    deps = ["//src/runtime:tree-sitter-runtime"],
+    deps = ["//src/runtime:tree-sitter"],
     copts = ["-Ilib/include/tree_sitter"]
 )
 

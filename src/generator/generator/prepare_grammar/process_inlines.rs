@@ -1,4 +1,4 @@
-use crate::generate::{
+use crate::generator::{
     grammars::{InlinedProductionMap, LexicalGrammar, Production, ProductionStep, SyntaxGrammar},
     rules::SymbolType,
 };
@@ -223,10 +223,10 @@ pub(super) fn process_inlines(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::generate::grammars::{
+    use crate::generator::grammars::{
         LexicalVariable, ProductionStep, SyntaxVariable, VariableType,
     };
-    use crate::generate::rules::{Associativity, Precedence, Symbol};
+    use crate::generator::rules::{Associativity, Precedence, Symbol};
 
     #[test]
     fn test_basic_inlining() {

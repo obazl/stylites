@@ -26,7 +26,7 @@ rust_library(
     # deps = all_crate_deps(normal = True) + [
     deps = [
         "@crate_index//:regex",
-        "//src/runtime:tree-sitter-runtime",
+        "//src/runtime:tree-sitter",
         # ":build_script"
     ],
     visibility = [

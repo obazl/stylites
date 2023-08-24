@@ -1,8 +1,8 @@
 use super::token_conflicts::TokenConflictMap;
-use crate::generate::dedup::split_state_id_groups;
-use crate::generate::grammars::{LexicalGrammar, SyntaxGrammar, VariableType};
-use crate::generate::rules::{AliasMap, Symbol, TokenSet};
-use crate::generate::tables::{
+use crate::generator::dedup::split_state_id_groups;
+use crate::generator::grammars::{LexicalGrammar, SyntaxGrammar, VariableType};
+use crate::generator::rules::{AliasMap, Symbol, TokenSet};
+use crate::generator::tables::{
     GotoAction, ParseAction, ParseState, ParseStateId, ParseTable, ParseTableEntry,
 };
 use log::info;

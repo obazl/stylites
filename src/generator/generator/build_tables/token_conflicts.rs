@@ -1,7 +1,7 @@
-use crate::generate::build_tables::item::TokenSetDisplay;
-use crate::generate::grammars::{LexicalGrammar, SyntaxGrammar};
-use crate::generate::nfa::{CharacterSet, NfaCursor, NfaTransition};
-use crate::generate::rules::TokenSet;
+use crate::generator::build_tables::item::TokenSetDisplay;
+use crate::generator::grammars::{LexicalGrammar, SyntaxGrammar};
+use crate::generator::nfa::{CharacterSet, NfaCursor, NfaTransition};
+use crate::generator::rules::TokenSet;
 use std::cmp::Ordering;
 use std::collections::HashSet;
 use std::fmt;
@@ -378,9 +378,9 @@ fn compute_conflict_status(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::generate::grammars::{Variable, VariableType};
-    use crate::generate::prepare_grammar::{expand_tokens, ExtractedLexicalGrammar};
-    use crate::generate::rules::{Precedence, Rule, Symbol};
+    use crate::generator::grammars::{Variable, VariableType};
+    use crate::generator::prepare_grammar::{expand_tokens, ExtractedLexicalGrammar};
+    use crate::generator::rules::{Precedence, Rule, Symbol};
 
     #[test]
     fn test_starting_characters() {

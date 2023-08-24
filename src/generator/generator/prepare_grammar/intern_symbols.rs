@@ -1,6 +1,6 @@
 use super::InternedGrammar;
-use crate::generate::grammars::{InputGrammar, Variable, VariableType};
-use crate::generate::rules::{Rule, Symbol};
+use crate::generator::grammars::{InputGrammar, Variable, VariableType};
+use crate::generator::rules::{Rule, Symbol};
 use anyhow::{anyhow, Result};
 
 pub(super) fn intern_symbols(grammar: &InputGrammar) -> Result<InternedGrammar> {

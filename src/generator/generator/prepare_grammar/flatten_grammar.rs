@@ -1,8 +1,8 @@
 use super::ExtractedSyntaxGrammar;
-use crate::generate::grammars::{
+use crate::generator::grammars::{
     Production, ProductionStep, SyntaxGrammar, SyntaxVariable, Variable,
 };
-use crate::generate::rules::{Alias, Associativity, Precedence, Rule, Symbol};
+use crate::generator::rules::{Alias, Associativity, Precedence, Rule, Symbol};
 use anyhow::{anyhow, Result};
 
 struct RuleFlattener {
@@ -219,8 +219,8 @@ unless they are used only as the grammar's start rule.
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::generate::grammars::VariableType;
-    use crate::generate::rules::Symbol;
+    use crate::generator::grammars::VariableType;
+    use crate::generator::rules::Symbol;
 
     #[test]
     fn test_flatten_grammar() {
