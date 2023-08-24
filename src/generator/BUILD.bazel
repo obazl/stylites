@@ -6,19 +6,19 @@ load("@rules_rust//rust:defs.bzl",
 
 rust_binary(
     name = "tree-sitter-generator",
-    srcs = ["main.rs"], # glob(["**/*.rs"]),
+    srcs = ["generator/main.rs"], # glob(["**/*.rs"]),
     # aliases = aliases(),
     edition = "2018",
     # proc_macro_deps = all_crate_deps(proc_macro = True),
     deps = [ # all_crate_deps(normal = True) + [
         "//src/runtime/bindings/rust:tree-sitter",
-        ":tree-sitter-generator",
+        ":generator",
 
         # "@crate_index//:ansi_term",
         "@crate_index//:anyhow",
-        # "@crate_index//:atty",
         "@crate_index//:clap",
-        "@crate_index//:glob"
+        "@crate_index//:glob",
+        "@crate_index//:log",
 
         # "//cli/config:tree-sitter-config",
         # "//cli/loader:tree-sitter-loader",

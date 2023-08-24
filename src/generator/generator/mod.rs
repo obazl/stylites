@@ -1,12 +1,13 @@
-// was: mod.rs
-
 use log::info;
+
+use std::ops::Not;
 
 mod binding_files;
 mod build_tables;
 mod char_tree;
 mod dedup;
 mod grammars;
+pub mod logger;
 mod nfa;
 mod node_types;
 pub mod parse_grammar;
@@ -111,14 +112,13 @@ pub fn generate_parser_in_directory(
     // write_file(&src_path.join("parser.c"), c_code)?;
 
     // write_file(&src_path.join("node-types.json"), node_types_json)?;
-    write_file(Path::new(node_bindings_outdir.unwrap()).join("node-types.json").as_path(), node_types_json)?;
+    if node_bindings_outdir.is_none().not() {
+        write_file(Path::new(node_bindings_outdir.unwrap()).join("node-types.json").as_path(), node_types_json)?;
 
-    // write_file(&header_path.join("parser.h"), tree_sitter::PARSER_HEADER)?;
-    let _ = write_file(Path::new(node_bindings_outdir.unwrap()).join("parser.h").as_path(), tree_sitter::PARSER_HEADER);
+        // write_file(&header_path.join("parser.h"), tree_sitter::PARSER_HEADER)?;
 
-    // if generate_bindings {
-    //     binding_files::generate_binding_files(&repo_path, &language_name)?;
-    // }
+        let _ = write_file(Path::new(node_bindings_outdir.unwrap()).join("parser.h").as_path(), tree_sitter::PARSER_HEADER);
+    }
 
     let _rustbindings = match generate_rust_bindings {
         Some(path) => binding_files::generate_rust_binding_files(Path::new(path), &language_name)?,

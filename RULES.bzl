@@ -17,7 +17,7 @@ def _ts_impl(ctx):
     outputs = []
 
     args = ctx.actions.args()
-    args.add("generate")
+    # args.add("generate")
     args.add_all(ctx.attr.opts)
     args.add("--grammar", ctx.file.grammar.path)
     args.add("-o", ctx.outputs.out.path)
@@ -74,7 +74,8 @@ tree_sitter_genparser = rule(
         ),
         "_tool": attr.label(
             allow_single_file = True,
-            default = "//tools/cli:tree-sitter",
+            # default = "//tools/cli:tree-sitter",
+            default = "//src/generator:tree-sitter-generator",
             executable = True,
             cfg = "exec"
         )
