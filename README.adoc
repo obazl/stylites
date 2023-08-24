@@ -34,12 +34,12 @@ Step 1: `$ CARGO_BAZEL_REPIN=1 bazel sync --only=crate-index`
 * `src/runtime/bindings/rust:tree-sitter` - Rust bindings for the C runtime
 * `src/runtime/bindings/wasm:tree-sitter` - wasm bindings for the C runtime (not yet implemented)
 
- `//examples/imp` contains an implementation of the [imp](https://softwarefoundations.cis.upenn.edu/lf-current/Imp.html) language (grammar from [How to write a tree-sitter grammar in an afternoon](https://siraben.dev/2022/03/01/tree-sitter.html). Builds the parser as a `cc_library` and includes a `cc_test` target that uses [Unity](https://github.com/ThrowTheSwitch/Unity).
+* `//examples/imp` contains an implementation of the [imp](https://softwarefoundations.cis.upenn.edu/lf-current/Imp.html) language (grammar from [How to write a tree-sitter grammar in an afternoon](https://siraben.dev/2022/03/01/tree-sitter.html). Builds the parser as a `cc_library` and includes a `cc_test` target that uses [Unity](https://github.com/ThrowTheSwitch/Unity).
 
-Try `bazel run examples/imp:repl`. This will launch a skeletal repl that currently just reads and echoes input. The plan is to support interactive parsing and querying, to replace the `tree-sitter-cli` command processor for those functions.
+* `bazel run examples/imp:repl`. This will launch a skeletal repl that currently just reads and echoes input. The plan is to support interactive parsing and querying, to replace the `tree-sitter-cli` command processor for those functions.
 
------
-Original readme:
+
+= Original readme:
 
 Tree-sitter is a parser generator tool and an incremental parsing library. It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited. Tree-sitter aims to be:
 
