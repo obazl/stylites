@@ -2,6 +2,10 @@
 bazel-*
 *.gz
 
+*.dSYM
+history.txt
+.history.txt
+
 log*.html
 
 .idea

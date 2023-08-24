@@ -1,7 +1,7 @@
 common --symlink_prefix=.bazel/
 common --enable_bzlmod
 common --lockfile_mode=off
-# common --registry=file:///%workspace%/../../obazl/registry
+
 common --registry=https://raw.githubusercontent.com/obazl/registry/main/
 common --registry=https://bcr.bazel.build
 
