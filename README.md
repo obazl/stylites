@@ -11,7 +11,9 @@ BAZEL STATUS: Very lightly tested, on MacOS only. This works: `bazel run cli:tre
 
 Step 1: `$ CARGO_BAZEL_REPIN=1 bazel sync --only=crate-index`
 
-Branch `test` contains `//examples/imp`, an implementation of the [imp](https://softwarefoundations.cis.upenn.edu/lf-current/Imp.html) language (grammar from [How to write a tree-sitter grammar in an afternoon](https://siraben.dev/2022/03/01/tree-sitter.html). Builds the parser as a `cc_library` and includes a `cc_test` target that uses [Unity](https://github.com/ThrowTheSwitch/Unity).
+ `//examples/imp` contains an implementation of the [imp](https://softwarefoundations.cis.upenn.edu/lf-current/Imp.html) language (grammar from [How to write a tree-sitter grammar in an afternoon](https://siraben.dev/2022/03/01/tree-sitter.html). Builds the parser as a `cc_library` and includes a `cc_test` target that uses [Unity](https://github.com/ThrowTheSwitch/Unity).
+
+Try `bazel run examples/imp:repl`. This will launch a skeletal repl that currently just reads and echoes input. The plan is to support interactive parsing and querying, to replace the `tree-sitter-cli` command processor for those functions.
 
 -----
 Original readme:
