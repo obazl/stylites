@@ -9,6 +9,8 @@
 BAZEL STATUS: Very lightly tested, on MacOS only. This works: `bazel run cli:tree-sitter`. The `cli` branch contains a custom
 `tree_sitter_genparser` rule, a version of `tree-sitter-cli` modified to improve the UI (and play nicer with Bazel), and simple test case (`bazel build example/hello:klingon.c`).
 
+Step 1: `$ CARGO_BAZEL_REPIN=1 bazel sync --only=crate-index`
+
 Branch `test` contains `//examples/imp`, an implementation of the [imp](https://softwarefoundations.cis.upenn.edu/lf-current/Imp.html) language (grammar from [How to write a tree-sitter grammar in an afternoon](https://siraben.dev/2022/03/01/tree-sitter.html). Builds the parser as a `cc_library` and includes a `cc_test` target that uses [Unity](https://github.com/ThrowTheSwitch/Unity).
 
 -----

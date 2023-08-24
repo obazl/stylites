@@ -1,5 +1,5 @@
 {
-  "checksum": "f7f8cd9787697a34ca48574d7b0391acd7413e3c5970d882388621cd3b3d6faa",
+  "checksum": "344256054bbe396105ebdff3e2c087bdc89ad438c16f72aa3347f54886ba5b2c",
   "crates": {
     "aho-corasick 1.0.4": {
       "name": "aho-corasick",
@@ -4439,7 +4439,7 @@
         {
           "Library": {
             "crate_name": "tree_sitter",
-            "crate_root": "binding_rust/lib.rs",
+            "crate_root": "lib.rs",
             "srcs": [
               "**/*.rs"
             ]
@@ -4448,7 +4448,7 @@
         {
           "BuildScript": {
             "crate_name": "build_script_build",
-            "crate_root": "binding_rust/build.rs",
+            "crate_root": "build.rs",
             "srcs": [
               "**/*.rs"
             ]
@@ -7048,13 +7048,13 @@
   },
   "binary_crates": [],
   "workspace_members": {
-    "tree-sitter 0.20.10": "lib",
-    "tree-sitter-cli 0.20.8": "cli",
-    "tree-sitter-config 0.19.0": "cli/config",
-    "tree-sitter-highlight 0.20.2": "highlight",
-    "tree-sitter-loader 0.20.0": "cli/loader",
-    "tree-sitter-tags 0.20.2": "tags",
-    "tree-sitter-tests-proc-macro 0.0.0": "cli/src/tests/proc_macro"
+    "tree-sitter 0.20.10": "src/runtime/bindings/rust",
+    "tree-sitter-cli 0.20.8": "tools/cli",
+    "tree-sitter-config 0.19.0": "tools/cli/config",
+    "tree-sitter-highlight 0.20.2": "tools/highlight",
+    "tree-sitter-loader 0.20.0": "tools/cli/loader",
+    "tree-sitter-tags 0.20.2": "tools/tags",
+    "tree-sitter-tests-proc-macro 0.0.0": "tools/cli/src/tests/proc_macro"
   },
   "conditions": {
     "aarch64-pc-windows-gnullvm": [],

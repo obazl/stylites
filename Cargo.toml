@@ -1,6 +1,6 @@
 [workspace]
-default-members = ["cli"]
-members = ["cli", "lib"]
+default-members = ["tools/cli"]
+members = ["tools/cli", "src/runtime/bindings/rust"]
 resolver = "2"
 
 [workspace.package]

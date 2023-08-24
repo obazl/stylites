@@ -1,0 +1,5 @@
+filegroup(
+    name = "srcs",
+    srcs = glob(["**"], exclude = ["lib.c"]),
+    visibility = ["//src/runtime:__pkg__"]
+)

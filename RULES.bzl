@@ -74,7 +74,7 @@ tree_sitter_genparser = rule(
         ),
         "_tool": attr.label(
             allow_single_file = True,
-            default = "//cli:tree-sitter",
+            default = "//tools/cli:tree-sitter",
             executable = True,
             cfg = "exec"
         )

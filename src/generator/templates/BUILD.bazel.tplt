@@ -1,0 +1,27 @@
+load("@rules_rust//cargo:defs.bzl", "cargo_build_script")
+load("@rules_rust//rust:defs.bzl",
+     "rust_binary", "rust_library", "rust_test")
+
+rust_library(
+    name = "tree-sitter-PARSER_NAME",
+    srcs = ["bindings/rust/lib.rs"],
+    edition = "2018",
+    proc_macro_deps = all_crate_deps(proc_macro = True),
+    rustc_env = {"EMSCRIPTEN_VERSION": "3.1.37",
+                 "RUST_BINDING_VERSION": "1"},
+    deps = all_crate_deps(normal = True) + [
+        "//lib:tree-sitter",
+        ":build"
+    ],
+    visibility = ["//visibility:public"]
+)
+
+cargo_build_script(
+    name = "build",
+    srcs = ["bindings/rust/build.rs"],
+    deps = all_crate_deps(
+        normal = True,
+        build = True,
+    ),
+    crate_root = "bindings/rust/build.rs",
+)

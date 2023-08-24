@@ -1,0 +1,69 @@
+load("@rules_rust//cargo:defs.bzl", "cargo_build_script")
+load("@crate_index//:defs.bzl",
+     "aliases", "all_crate_deps")
+load("@rules_rust//rust:defs.bzl",
+     "rust_binary", "rust_library", "rust_test")
+
+rust_binary(
+    name = "tree-sitter-generator",
+    srcs = ["main.rs"], # glob(["**/*.rs"]),
+    # aliases = aliases(),
+    edition = "2018",
+    proc_macro_deps = all_crate_deps(proc_macro = True),
+    deps = all_crate_deps(normal = True) + [
+        # "//cli/config:tree-sitter-config",
+        # "//cli/loader:tree-sitter-loader",
+        # "//highlight:tree-sitter-highlight",
+        "//src/runtime/bindings/rust:tree-sitter",
+        # ":tree-sitter-cli"
+    ],
+    visibility = ["//visibility:public"]
+)
+
+rust_library(
+    name = "tree-sitter-generator",
+    srcs = glob(["**/*.rs"], excluding=["main.rs"]),
+    edition = "2018",
+    proc_macro_deps = all_crate_deps(proc_macro = True),
+    rustc_env = {# "EMSCRIPTEN_VERSION": "3.1.37",
+        ## from Cargo.toml: dependencies.tree-sitter.version
+        "RUST_BINDING_VERSION": "0.20.10"
+    },
+    deps = all_crate_deps(normal = True) + [
+        "//src/runtime/bindings/rust:tree-sitter",
+
+        # "//cli/loader:tree-sitter-loader",
+        # "//highlight:tree-sitter-highlight",
+        # "//tags:tree-sitter-tags",
+        # ":build"
+    ],
+    data = [
+        "dsl.js",
+        "src/generate/prepare_grammar/unicode-categories.json",
+        "src/generate/prepare_grammar/unicode-category-aliases.json",
+        "src/generate/prepare_grammar/unicode-properties.json",
+        "src/generate/prepare_grammar/unicode-property-aliases.json",
+        "src/generate/templates/binding.cc",
+        "src/generate/templates/binding.gyp",
+        "src/generate/templates/BUILD.bazel.tplt",
+        "src/generate/templates/cargo.toml",
+        "src/generate/templates/index.js",
+        "src/generate/templates/package.json",
+        "src/playground.html",
+        "vendor/xterm-colors.json"
+    ],
+)
+
+# cargo_build_script(
+#     name = "build",
+#     srcs = ["build.rs"],
+#     data = [
+#         "emscripten-version",
+#         "Cargo.toml"
+#     ],
+#     deps = all_crate_deps(
+#         normal = True,
+#         build = True,
+#     ),
+#     crate_root = "build.rs",
+# )
