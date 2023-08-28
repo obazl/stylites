@@ -1,6 +1,8 @@
-= obazl tree-sitter
+= stylites: tree-sitter bazelized
 
 A bazel-enabled fork of link:https://github.com/tree-sitter/tree-sitter[tree-sitter].
+
+link:https://en.wikipedia.org/wiki/Simeon_Stylites[Simeon Stylites] was not a tree-sitter, but he was the original column-sitter.
 
 WARNING: EXPERIMENTAL! Source code is reorganized in order to make the
 build structure clearer, support better Bazel integration, and in
