@@ -1,0 +1,55 @@
+load("//:RULES.bzl", "tree_sitter_genparser")
+
+GOPT_VERSION = "10.0.0"
+LIBLOGC_VERSION = "1.0.0"
+LINENOISE_VERSION = "1.0.0"
+
+LINKOPTS = []
+DEFINES = []
+LOCAL_DEFINES      = select({
+    "@platforms//os:macos"  : ["DSO_EXT=\\\".dylib\\\""],
+    "@platforms//os:windows": ["DSO_EXT=\\\".dll\\\""],
+    "//conditions:default"  : ["DSO_EXT=\\\".so\\\""]
+})
+TOOLCHAINS    = ["//:repo_paths"]
+TIMEOUT = "short"
+TAGS = []
+
+##########
+cc_binary(
+    name  = "repl",
+    srcs = ["repl.c"],
+    deps = [
+        "@gopt//src:gopt",
+        "@liblogc//src:logc",
+        "@linenoise//src:linenoise",
+        "@uthash//src:uthash",
+        "//src/runtime:tree-sitter"
+    ],
+    data = ["//config:grammar"],
+    copts = [
+        "-I$(@gopt)/src",
+        "-Iexternal/liblogc~{}/src".format(LIBLOGC_VERSION),
+        "-Iexternal/linenoise~{}/src".format(LINENOISE_VERSION),
+        "-I$(@uthash)/src",
+        "-Isrc/runtime"
+    ] + select({
+        "@platforms//os:linux": ["-std=gnu11"],
+        "//conditions:default": ["-std=c11"],
+    }),
+    linkopts = LINKOPTS + select({
+        # "@platforms//os:bsd": ["-Wl,-export-dynamic"],
+        # "@platforms//os:macos": [],
+        "@platforms//os:linux": [
+            # "-ldl",
+            # "-Wl,-export-dynamic" # same as -rdynamic?
+            # if math_s7 included add -lm
+        ],
+        # "//:linux_clang": ["-ldl", "-Wl,-export-dynamic"],
+        "//conditions:default": []
+    }),
+    local_defines = LOCAL_DEFINES,
+    defines = DEFINES,
+    toolchains = TOOLCHAINS,
+    visibility = ["//visibility:public"]
+)

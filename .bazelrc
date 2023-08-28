@@ -4,7 +4,7 @@ common --lockfile_mode=off
 
 common --registry=https://raw.githubusercontent.com/obazl/registry/main/
 common --registry=https://bcr.bazel.build
-
+common --registry=https://raw.githubusercontent.com/matts1/bazel-central-registry/main
 
 # https://github.com/bazelbuild/apple_support#toolchain-setup
 

@@ -1,6 +1,6 @@
 load("@rules_rust//cargo:defs.bzl", "cargo_build_script")
-load("@crate_index//:defs.bzl",
-     "aliases", "all_crate_deps")
+# load("@crate_index//:defs.bzl",
+#      "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_library", "rust_test")
 
 filegroup(
@@ -20,12 +20,12 @@ rust_library(
     ],
     # crate_features = ["bindgen"],
     # rustc_env = {"OUT_DIR": "foo"},
-    aliases = aliases(),
+    # aliases = aliases(),
     edition = "2018",
     # proc_macro_deps = all_crate_deps(proc_macro = True),
     # deps = all_crate_deps(normal = True) + [
     deps = [
-        "@crate_index//:regex",
+        "@stylites_crates//:regex",
         "//src/runtime:tree-sitter",
         # ":build_script"
     ],

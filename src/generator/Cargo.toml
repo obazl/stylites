@@ -1,5 +1,5 @@
 [package]
-name = "tree-sitter-generator"
+name = "tree_sitter_generator"
 # name = "tree-sitter-cli"
 description = "CLI tool for developing, testing, and using Tree-sitter parsers"
 version = "0.20.8"
@@ -13,17 +13,17 @@ repository = "https://github.com/tree-sitter/tree-sitter"
 rust-version.workspace = true
 
 [[bin]]
-name = "tree-sitter-generator"
+name = "tree_sitter_generator"
 path = "main.rs"
 
 [lib]
-name = "tree-sitter-generator"
+name = "tree_sitter_generator"
 path = "lib.rs"
 crate-type = ["lib"]
 
-[[bench]]
-name = "benchmark"
-harness = false
+# [[bench]]
+# name = "benchmark"
+# harness = false
 
 [dependencies]
 ansi_term = "0.12.1"
@@ -79,7 +79,7 @@ version = "0.4.19"
 features = ["std"]
 
 [dev-dependencies]
-tree_sitter_proc_macro = { path = "src/tests/proc_macro", package = "tree-sitter-tests-proc-macro" }
+tree_sitter_proc_macro = { path = "../../tools/cli/src/tests/proc_macro", package = "tree-sitter-tests-proc-macro" }
 
 rand = "0.8.5"
 tempfile = "3.6.0"

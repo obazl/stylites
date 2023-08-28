@@ -1,6 +1,5 @@
 [workspace]
-default-members = ["tools/cli"]
-members = ["tools/cli", "src/runtime/bindings/rust"]
+members = ["src/runtime/bindings/rust", "src/generator", "tools/cli/src/tests/proc_macro"] # "tools/cli",
 resolver = "2"
 
 [workspace.package]

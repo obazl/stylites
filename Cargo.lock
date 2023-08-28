@@ -92,9 +92,9 @@ checksum = "89b2fd2a0dcf38d7971e2194b6b6eebab45ae01067456a7fd93d5547a61b70be"
 
 [[package]]
 name = "cc"
-version = "1.0.82"
+version = "1.0.83"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "305fe645edc1442a0fa8b6726ba61d422798d37a52e12eaecf4b022ebbb88f01"
+checksum = "f1174fb0b6ec23863f8b971027804a42614e347eafb0a95bf0b12cdae21fc4d0"
 dependencies = [
  "libc",
 ]
@@ -212,31 +212,11 @@ checksum = "524cbf6897b527295dff137cec09ecf3a05f4fddffd7dfcd1585403449e74198"
 
 [[package]]
 name = "dirs"
-version = "3.0.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "30baa043103c9d0c2a57cf537cc2f35623889dc0d405e6c3cccfadbc81c71309"
-dependencies = [
- "dirs-sys 0.3.7",
-]
-
-[[package]]
-name = "dirs"
 version = "5.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "44c45a9d03d6676652bcb5e724c7e988de1acad23a711b5217ab9cbecbec2225"
 dependencies = [
- "dirs-sys 0.4.1",
-]
-
-[[package]]
-name = "dirs-sys"
-version = "0.3.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1b1d1d91c932ef41c0f2663aa8b0ca0342d444d842c06914aa0a7e352d0bada6"
-dependencies = [
- "libc",
- "redox_users",
- "winapi",
+ "dirs-sys",
 ]
 
 [[package]]
@@ -924,7 +904,17 @@ dependencies = [
 ]
 
 [[package]]
-name = "tree-sitter-cli"
+name = "tree-sitter-tests-proc-macro"
+version = "0.0.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "rand",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "tree_sitter_generator"
 version = "0.20.8"
 dependencies = [
  "ansi_term",
@@ -934,7 +924,7 @@ dependencies = [
  "ctor",
  "ctrlc",
  "difference",
- "dirs 5.0.1",
+ "dirs",
  "glob",
  "html-escape",
  "indexmap",
@@ -955,72 +945,11 @@ dependencies = [
  "tiny_http",
  "toml",
  "tree-sitter",
- "tree-sitter-config",
- "tree-sitter-highlight",
- "tree-sitter-loader",
- "tree-sitter-tags",
  "tree-sitter-tests-proc-macro",
  "unindent",
  "walkdir",
  "webbrowser",
  "which",
-]
-
-[[package]]
-name = "tree-sitter-config"
-version = "0.19.0"
-dependencies = [
- "anyhow",
- "dirs 3.0.2",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "tree-sitter-highlight"
-version = "0.20.2"
-dependencies = [
- "lazy_static",
- "regex",
- "thiserror",
- "tree-sitter",
-]
-
-[[package]]
-name = "tree-sitter-loader"
-version = "0.20.0"
-dependencies = [
- "anyhow",
- "cc",
- "dirs 3.0.2",
- "libloading",
- "once_cell",
- "regex",
- "serde",
- "serde_json",
- "tree-sitter",
- "tree-sitter-highlight",
- "tree-sitter-tags",
-]
-
-[[package]]
-name = "tree-sitter-tags"
-version = "0.20.2"
-dependencies = [
- "memchr",
- "regex",
- "thiserror",
- "tree-sitter",
-]
-
-[[package]]
-name = "tree-sitter-tests-proc-macro"
-version = "0.0.0"
-dependencies = [
- "proc-macro2",
- "quote",
- "rand",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -1352,9 +1281,9 @@ checksum = "ed94fce61571a4006852b7389a063ab983c02eb1bb37b47f8272ce92d06d9538"
 
 [[package]]
 name = "winnow"
-version = "0.5.14"
+version = "0.5.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d09770118a7eb1ccaf4a594a221334119a44a814fcb0d31c5b85e83e97227a97"
+checksum = "7c2e3184b9c4e92ad5167ca73039d0c42476302ab603e2fec4487511f38ccefc"
 dependencies = [
  "memchr",
 ]

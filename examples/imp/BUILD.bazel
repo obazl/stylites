@@ -39,6 +39,18 @@ cc_library(
     copts = ["-Ilib/include/tree_sitter"]
 )
 
+cc_shared_library(
+    name = "imp_dso",
+    shared_lib_name = select({
+        "@platforms//os:macos": "libimp.dylib",
+        "@platforms//os:linux": "libimp.so",
+        # "@platforms//os:windows": "libimp.dll",
+        "//conditions:default": "libimp.so"
+    }),
+    deps = [":imp"],
+    visibility = ["//visibility:public"]
+)
+
 tree_sitter_genparser(
     name = "parser",
     grammar = "grammar.js",

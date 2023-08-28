@@ -1,6 +1,6 @@
 load("@rules_rust//cargo:defs.bzl", "cargo_build_script")
-load("@crate_index//:defs.bzl",
-     "aliases", "all_crate_deps")
+# load("@stylites_crates//:defs.bzl",
+#      "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl",
      "rust_binary", "rust_library", "rust_test")
 
@@ -14,11 +14,11 @@ rust_binary(
         "//src/runtime/bindings/rust:tree-sitter",
         ":generator",
 
-        # "@crate_index//:ansi_term",
-        "@crate_index//:anyhow",
-        "@crate_index//:clap",
-        "@crate_index//:glob",
-        "@crate_index//:log",
+        # "@stylites_crates//:ansi_term",
+        "@stylites_crates//:anyhow",
+        "@stylites_crates//:clap",
+        "@stylites_crates//:glob",
+        "@stylites_crates//:log",
 
         # "//cli/config:tree-sitter-config",
         # "//cli/loader:tree-sitter-loader",
@@ -43,20 +43,20 @@ rust_library(
     },
     deps = [ # all_crate_deps(normal = True) + [
         "//src/runtime/bindings/rust:tree-sitter",
-        "@crate_index//:ansi_term",
-        "@crate_index//:anyhow",
-        "@crate_index//:atty",
-        "@crate_index//:clap",
-        "@crate_index//:indexmap",
-        "@crate_index//:lazy_static",
-        "@crate_index//:log",
-        "@crate_index//:regex",
-        "@crate_index//:regex-syntax",
-        "@crate_index//:rustc-hash",
-        "@crate_index//:semver",
-        "@crate_index//:smallbitvec",
-        "@crate_index//:serde",
-        "@crate_index//:serde_json",
+        "@stylites_crates//:ansi_term",
+        "@stylites_crates//:anyhow",
+        "@stylites_crates//:atty",
+        "@stylites_crates//:clap",
+        "@stylites_crates//:indexmap",
+        "@stylites_crates//:lazy_static",
+        "@stylites_crates//:log",
+        "@stylites_crates//:regex",
+        "@stylites_crates//:regex-syntax",
+        "@stylites_crates//:rustc-hash",
+        "@stylites_crates//:semver",
+        "@stylites_crates//:smallbitvec",
+        "@stylites_crates//:serde",
+        "@stylites_crates//:serde_json",
 
         # "//cli/loader:tree-sitter-loader",
         # "//highlight:tree-sitter-highlight",
