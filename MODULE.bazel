@@ -1,21 +1,21 @@
 module(
-    name = "tree-sitter",
-    version = "1.0.0",
-    compatibility_level = 1,
+    name = "stylites",
+    version = "0.25.3",
+    compatibility_level = 0,
 )
-bazel_dep(name = "platforms", version = "0.0.7")
-bazel_dep(name = "bazel_skylib", version = "1.4.2")
-bazel_dep(name = "rules_cc", version = "0.0.8")
+bazel_dep(name = "platforms", version = "0.0.11")
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "rules_cc", version = "0.1.1")
 
-bazel_dep(name = "liblogc",  version = "1.0.0")
-bazel_dep(name = "gopt",  version = "10.0.0",
+bazel_dep(name = "liblogc", version = "3.0.0")
+bazel_dep(name = "gopt",    version = "10.0.0",
           dev_dependency = True)
-bazel_dep(name = "linenoise",  version = "1.0.0",
+bazel_dep(name = "linenoise",  version = "2.0.0.dev",
           dev_dependency = True)
-bazel_dep(name = "unity", version = "2.5.2",
+bazel_dep(name = "unity", version = "2.6.1.bzl",
           dev_dependency = True)
 
-bazel_dep(name = "apple_support", version = "1.8.1",
+bazel_dep(name = "apple_support", version = "1.17.1",
           repo_name = "build_bazel_apple_support")
 apple_cc_configure = use_extension("@build_bazel_apple_support//crosstool:setup.bzl", "apple_cc_configure_extension")
 use_repo(apple_cc_configure, "local_config_apple_cc")
@@ -25,26 +25,38 @@ bazel_dep(name = "rules_nodejs", version = "6.0.1")
 # bazel_dep(name = "aspect_rules_js", version = "1.9.0",
 #           dev_dependency = True)
 
-bazel_dep(
-    name = "rules_rust",
-    version = "0.26.0",
-    dev_dependency = True,
-)
-
-git_override(
-    module_name = "rules_rust",
-    remote = "https://github.com/bazelbuild/rules_rust.git",
-    commit = "0ed7157402aacd2c8b5310d8348ec792826da4d4",
-)
-# https://github.com/bazelbuild/rules_rust/commit/0ed7157402aacd2c8b5310d8348ec792826da4d4
-# patches=[], patch_cmds=[], patch_strip=0
-# )
-
-################################################################
 ## https://github.com/bazelbuild/rules_rust/pull/2021
+bazel_dep(name = "rules_rust", version = "0.59.1",
+          dev_dependency = True)
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(edition = "2021", versions = ["1.79.0"])
+use_repo(rust, "rust_toolchains")
+register_toolchains("@rust_toolchains//:all")
 
-# rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
-# rust.toolchain(edition = "2021")
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+
+crate.spec(package = "ansi_term", version = "0.12.1")
+crate.spec(package = "anyhow", version = "1.0.72")
+crate.spec(package = "atty", version = "0.2.14")
+crate.spec(package = "clap", version = "2.32")
+crate.spec(package = "glob", version = "0.3.1")
+crate.spec(package = "indexmap", version = "2.0.0")
+crate.spec(package = "lazy_static", version = "1.4.0")
+crate.spec(package = "log", version = "0.4.19",
+           features = ["std"])
+crate.spec(package = "regex", version = "1.9.1")
+crate.spec(package = "regex-syntax", version = "0.7.4")
+crate.spec(package = "rustc-hash", version = "1.1.0")
+crate.spec(package = "semver", version = "1.0.18")
+crate.spec(package = "smallbitvec", version = "2.5.1")
+crate.spec(package = "serde", version = "1.0",
+           features = ["derive"])
+crate.spec(package = "serde_json", version = "1.0",
+           features = ["preserve_order"])
+
+crate.from_specs()
+use_repo(crate, "crates")
+
 # use_repo(
 #     rust,
 #     "rust_toolchains",

@@ -1,6 +1,6 @@
 load("@rules_rust//cargo:defs.bzl", "cargo_build_script")
-load("@crate_index//:defs.bzl",
-     "aliases", "all_crate_deps")
+# load("@crate_index//:defs.bzl",
+#      "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl",
      "rust_binary", "rust_library", "rust_test")
 
@@ -9,16 +9,16 @@ rust_binary(
     srcs = ["generator/main.rs"], # glob(["**/*.rs"]),
     # aliases = aliases(),
     edition = "2018",
-    # proc_macro_deps = all_crate_deps(proc_macro = True),
+    # proc_macro_deps = "@crates//:all",
     deps = [ # all_crate_deps(normal = True) + [
         "//src/runtime/bindings/rust:tree-sitter",
         ":generator",
 
-        # "@crate_index//:ansi_term",
-        "@crate_index//:anyhow",
-        "@crate_index//:clap",
-        "@crate_index//:glob",
-        "@crate_index//:log",
+        # "@crates//:ansi_term",
+        "@crates//:anyhow",
+        "@crates//:clap",
+        "@crates//:glob",
+        "@crates//:log",
 
         # "//cli/config:tree-sitter-config",
         # "//cli/loader:tree-sitter-loader",
@@ -43,27 +43,26 @@ rust_library(
     },
     deps = [ # all_crate_deps(normal = True) + [
         "//src/runtime/bindings/rust:tree-sitter",
-        "@crate_index//:ansi_term",
-        "@crate_index//:anyhow",
-        "@crate_index//:atty",
-        "@crate_index//:clap",
-        "@crate_index//:indexmap",
-        "@crate_index//:lazy_static",
-        "@crate_index//:log",
-        "@crate_index//:regex",
-        "@crate_index//:regex-syntax",
-        "@crate_index//:rustc-hash",
-        "@crate_index//:semver",
-        "@crate_index//:smallbitvec",
-        "@crate_index//:serde",
-        "@crate_index//:serde_json",
-
+        "@crates//:ansi_term",
+        "@crates//:anyhow",
+        "@crates//:atty",
+        "@crates//:clap",
+        "@crates//:indexmap",
+        "@crates//:lazy_static",
+        "@crates//:log",
+        "@crates//:regex",
+        "@crates//:regex-syntax",
+        "@crates//:rustc-hash",
+        "@crates//:semver",
+        "@crates//:smallbitvec",
+        "@crates//:serde",
+        "@crates//:serde_json",
         # "//cli/loader:tree-sitter-loader",
         # "//highlight:tree-sitter-highlight",
         # "//tags:tree-sitter-tags",
         # ":build"
     ],
-    data = [
+    compile_data = [
         "generator/dsl.js",
         "generator/prepare_grammar/unicode-categories.json",
         "generator/prepare_grammar/unicode-category-aliases.json",

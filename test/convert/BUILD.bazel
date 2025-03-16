@@ -1,5 +1,5 @@
-load("@crate_index//:defs.bzl",
-     "aliases", "all_crate_deps")
+# load("@crate_index//:defs.bzl",
+#      "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl",
      "rust_binary", "rust_library", "rust_test")
 
@@ -9,14 +9,14 @@ rust_binary(
     edition = "2018",
     # proc_macro_deps = all_crate_deps(proc_macro = True),
     deps = [ # all_crate_deps(normal = True) + [
-        "@crate_index//:ansi_term",
-        "@crate_index//:anyhow",
-        "@crate_index//:clap",
-        "@crate_index//:ctrlc",
-        "@crate_index//:difference",
-        "@crate_index//:lazy_static",
-        "@crate_index//:regex",
-        "@crate_index//:walkdir",
+        "@crates//:ansi_term",
+        "@crates//:anyhow",
+        "@crates//:clap",
+        "@crates//:ctrlc",
+        "@crates//:difference",
+        "@crates//:lazy_static",
+        "@crates//:regex",
+        "@crates//:walkdir",
         "//src/runtime/bindings/rust:tree-sitter"],
     # visibility = ["//visibility:public"]
 )

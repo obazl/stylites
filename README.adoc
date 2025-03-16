@@ -2,7 +2,7 @@
 
 A bazel-enabled fork of link:https://github.com/tree-sitter/tree-sitter[tree-sitter].
 
-link:https://en.wikipedia.org/wiki/Simeon_Stylites[Simeon Stylites] was not a tree-sitter, but he was the original column-sitter.
+https://en.wikipedia.org/wiki/Simeon_Stylites[Simeon Stylites] was not a tree-sitter, but he was the original column-sitter.
 
 WARNING: EXPERIMENTAL! Source code is reorganized in order to make the
 build structure clearer, support better Bazel integration, and in
@@ -36,7 +36,7 @@ Step 1: `$ CARGO_BAZEL_REPIN=1 bazel sync --only=crate-index`
 * `src/runtime/bindings/rust:tree-sitter` - Rust bindings for the C runtime
 * `src/runtime/bindings/wasm:tree-sitter` - wasm bindings for the C runtime (not yet implemented)
 
-* `//examples/imp` contains an implementation of the [imp](https://softwarefoundations.cis.upenn.edu/lf-current/Imp.html) language (grammar from [How to write a tree-sitter grammar in an afternoon](https://siraben.dev/2022/03/01/tree-sitter.html). Builds the parser as a `cc_library` and includes a `cc_test` target that uses [Unity](https://github.com/ThrowTheSwitch/Unity).
+* link:examples/imp[examples/imp] contains an implementation of the https://softwarefoundations.cis.upenn.edu/lf-current/Imp.html[imp] language (grammar from https://siraben.dev/2022/03/01/tree-sitter.html[How to write a tree-sitter grammar in an afternoon]). Builds the parser as a `cc_library` and includes a `cc_test` target that uses https://github.com/ThrowTheSwitch/Unity[Unity].
 
 * `bazel run examples/imp:repl`. This will launch a skeletal repl that currently just reads and echoes input. The plan is to support interactive parsing and querying, to replace the `tree-sitter-cli` command processor for those functions.
 
@@ -52,7 +52,7 @@ Tree-sitter is a parser generator tool and an incremental parsing library. It ca
 
 ## Links
 
-- [Documentation](https://tree-sitter.github.io)
-- [Rust binding](lib/binding_rust/README.md)
-- [WASM binding](lib/binding_web/README.md)
-- [Command-line interface](cli/README.md)
+- https://tree-sitter.github.io[Documentation]
+- https://crates.io/crates/tree-sitter[Rust Tree-sitter]
+- https://www.npmjs.com/package/web-tree-sitter[Web Tree-sitter]
+- https://github.com/tree-sitter/tree-sitter/tree/master/cli[Command-line interface]

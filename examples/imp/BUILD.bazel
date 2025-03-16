@@ -1,16 +1,16 @@
 load("//:RULES.bzl", "tree_sitter_genparser")
 
-GOPT_VERSION = "10.0.0"
-LIBLOGC_VERSION = "1.0.0"
-LINENOISE_VERSION = "1.0.0"
+# GOPT_VERSION = "10.0.0"
+# LIBLOGC_VERSION = "1.0.0"
+# LINENOISE_VERSION = "1.0.0"
 
-DEPS = ["@gopt//src:gopt",
-        "@liblogc//src:logc",
-        "@unity//src:unity",
+DEPS = ["@gopt//lib:gopt",
+        "@liblogc//lib:logc",
+        "@unity//lib:unity",
         "//src/runtime:tree-sitter",
         ":imp"]
-COPTS = ["-Iexternal/gopt~10.0.0/src",
-         "-Iexternal/unity~2.5.2/src",
+COPTS = [#"-Iexternal/gopt~10.0.0/src",
+         #"-Iexternal/unity~2.5.2/src",
          "-Isrc/runtime"]
 LINKOPTS = []
 DEFINES = []
@@ -57,14 +57,14 @@ cc_binary(
     srcs = ["imp_repl.c"] + select({
         "//conditions:default": []
     }),
-    deps = DEPS + ["@linenoise//src:linenoise"],
+    deps = DEPS + ["@linenoise//lib:linenoise"],
     copts = select({
         "@platforms//os:linux": ["-std=gnu11"],
         "//conditions:default": ["-std=c11"],
     }) + [
-        "-Iexternal/gopt~{}/src".format(GOPT_VERSION),
-        "-Iexternal/liblogc~{}/src".format(LIBLOGC_VERSION),
-        "-Iexternal/linenoise~{}/src".format(LINENOISE_VERSION),
+        # "-Iexternal/gopt~{}/src".format(GOPT_VERSION),
+        # "-Iexternal/liblogc~{}/src".format(LIBLOGC_VERSION),
+        # "-Iexternal/linenoise~{}/src".format(LINENOISE_VERSION),
     ],
     data = [
         # ":repl.scm",
